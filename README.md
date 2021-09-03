@@ -8,16 +8,18 @@
 
 # 기술 스택
 
-| key       |                value |
-| :-------- | -------------------: |
-| Language  |           TypeScript |
-| DB        |           postgresql |
-| Framework |               NestJS |
-| Formatter | eslint <br> prettier |
+| key        |                  value |
+| :--------- | ---------------------: |
+| Language   |             TypeScript |
+| DB         |             postgresql |
+| Framework  |                 NestJS |
+| Formatter  |   eslint <br> prettier |
+| Deployment | EC2 (t3.nano) <br> pm2 |
 
-# API Docs
+# API
 
-`/swagger`
+- [DOC](http://3.37.177.127:5000/swagger)
+- base_url: `http://3.37.177.127:5000/v1/`
 
 # 비고
 
@@ -26,5 +28,5 @@
 # CI / CD
 
 - github actions
-    - lint: `lint.yml`
-    - build: `build.yml` -> 토큰 2021년 12월 2일 만료
+  - lint: `lint.yml`
+  - build: `build.yml`-> 토큰 2021년 12월 2일 만료
