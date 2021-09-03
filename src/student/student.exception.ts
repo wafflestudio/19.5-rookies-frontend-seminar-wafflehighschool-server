@@ -1,5 +1,6 @@
-import { ErrorCode, WrrsException } from '../common/exceptions/wrrs-exception';
 import { HttpStatus } from '@nestjs/common';
+
+import { ErrorCode, WrrsException } from '../common/exceptions/wrrs-exception';
 
 export class DuplicatedStudentException extends WrrsException {
   constructor() {

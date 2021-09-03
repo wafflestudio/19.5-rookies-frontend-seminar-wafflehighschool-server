@@ -1,6 +1,7 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
-import { validGrade, validName } from './student.dto';
 import { ApiProperty } from '@nestjs/swagger';
+
+import { validGrade, validName } from './student.dto';
 
 @Entity()
 export class StudentEntity {
