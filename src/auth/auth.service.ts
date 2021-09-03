@@ -2,7 +2,9 @@ import { ForbiddenException, HttpStatus, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
+
 import { UserEntity } from '../user/user.entity';
+
 import { LoginRequestDto } from './auth.dto';
 
 @Injectable()
@@ -29,6 +31,7 @@ export class AuthService {
     const isMatch = loginUserDto.password === user.password;
 
     if (isMatch) {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { password, ...result } = user;
       return result;
     } else {

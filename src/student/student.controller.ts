@@ -7,8 +7,6 @@ import {
   Patch,
   Post,
 } from '@nestjs/common';
-import { StudentService } from './student.service';
-import { StudentEntity } from './student.entity';
 import {
   ApiBadRequestResponse,
   ApiBody,
@@ -17,13 +15,17 @@ import {
   ApiOperation,
   ApiTags,
 } from '@nestjs/swagger';
+
+import { WrrsException } from '../common/exceptions/wrrs-exception';
+
+import { StudentService } from './student.service';
+import { StudentEntity } from './student.entity';
 import {
   CreateStudentRequestDto,
   DeleteStudentResponseDto,
   PatchStudentRequestDto,
   PatchStudentResponseDto,
 } from './student.dto';
-import { WrrsException } from '../common/exceptions/wrrs-exception';
 
 @Controller('v1/student')
 @ApiTags('학생 관리 API')
