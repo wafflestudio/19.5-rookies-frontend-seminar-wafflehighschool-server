@@ -6,6 +6,7 @@ import {
   Param,
   Patch,
   Post,
+  UseGuards,
 } from '@nestjs/common';
 import {
   ApiBadRequestResponse,
@@ -17,6 +18,7 @@ import {
 } from '@nestjs/swagger';
 
 import { WrrsException } from '../common/exceptions/wrrs-exception';
+import { JwtAuthGuard } from '../auth/jwt-auth-guard';
 
 import { StudentService } from './student.service';
 import { StudentEntity } from './student.entity';
@@ -27,6 +29,7 @@ import {
   PatchStudentResponseDto,
 } from './student.dto';
 
+@UseGuards(JwtAuthGuard)
 @Controller('v1/student')
 @ApiTags('학생 관리 API')
 export class StudentController {

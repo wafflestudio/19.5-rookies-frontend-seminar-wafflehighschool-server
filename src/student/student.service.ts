@@ -24,8 +24,8 @@ export class StudentService {
 
   getGuardedStudent(
     student: CreateStudentRequestDto,
-  ): Omit<StudentEntity, 'id'> {
-    const { grade, name, profile_img } = student;
+  ): Omit<StudentEntity, 'id' | 'user'> {
+    const { grade, name, profile_img, email, phone, major } = student;
     const guardedGrade = (() => {
       if (grade !== 1 && grade !== 2 && grade !== 3) {
         throw new InvalidGradeException();
@@ -51,6 +51,9 @@ export class StudentService {
       name: guardedName,
       grade: guardedGrade,
       profile_img: guardedProfileImg,
+      email,
+      phone,
+      major,
     };
   }
 
