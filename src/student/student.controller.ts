@@ -6,6 +6,7 @@ import {
   Param,
   Patch,
   Post,
+  Req,
   UseGuards,
 } from '@nestjs/common';
 import {
@@ -19,6 +20,7 @@ import {
 
 import { WrrsException } from '../common/exceptions/wrrs-exception';
 import { JwtAuthGuard } from '../auth/jwt-auth-guard';
+import { UserEntity } from '../user/user.entity';
 
 import { StudentService } from './student.service';
 import { StudentEntity } from './student.entity';
@@ -44,8 +46,8 @@ export class StudentController {
     isArray: true,
     type: StudentEntity,
   })
-  async getStudents(): Promise<StudentEntity[]> {
-    return this.studentService.findAll();
+  async getStudents(@Req() req): Promise<StudentEntity[]> {
+    return this.studentService.findByUser(req.user);
   }
 
   @Post()
@@ -59,8 +61,9 @@ export class StudentController {
   async createStudent(
     @Body()
     body,
+    @Req() req,
   ) {
-    return this.studentService.create(body);
+    return this.studentService.create(req.user, body);
   }
 
   @Get(':id')

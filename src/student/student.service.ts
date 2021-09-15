@@ -3,6 +3,9 @@ import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { isEmpty } from 'lodash';
 
+import { ReqUserDto } from '../user/user.dto';
+import { UserEntity } from '../user/user.entity';
+
 import { StudentEntity } from './student.entity';
 import {
   BadDataException,
@@ -18,6 +21,8 @@ export class StudentService {
   constructor(
     @InjectRepository(StudentEntity)
     private studentRepository: Repository<StudentEntity>,
+    @InjectRepository(UserEntity)
+    private userRepository: Repository<UserEntity>,
   ) {
     this.getGuardedStudent.bind(this);
   }
@@ -57,8 +62,9 @@ export class StudentService {
     };
   }
 
-  findAll(): Promise<StudentEntity[]> {
-    return this.studentRepository.find();
+  async findByUser({ username }: ReqUserDto): Promise<StudentEntity[]> {
+    const user = await this.userRepository.findOne({ where: { username } });
+    return this.studentRepository.find({ where: { user } });
   }
 
   async find(id: number): Promise<StudentEntity> {
@@ -86,10 +92,18 @@ export class StudentService {
     return { success: true as const };
   }
 
-  async create(student) {
-    const guardedStudent = this.getGuardedStudent(student);
+  async create({ username }, student) {
+    const user: UserEntity = await this.userRepository.findOne({
+      where: { username },
+    });
+
+    const guardedStudent = { ...this.getGuardedStudent(student), user };
     const foundStudent = await this.studentRepository.findOne({
-      where: guardedStudent,
+      where: {
+        name: guardedStudent.name,
+        grade: guardedStudent.grade,
+        user: guardedStudent.user,
+      },
     });
     if (foundStudent) {
       throw new DuplicatedStudentException();
