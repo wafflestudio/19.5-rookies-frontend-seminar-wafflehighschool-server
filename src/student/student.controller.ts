@@ -60,7 +60,7 @@ export class StudentController {
   @ApiOperation({ summary: '학생 생성', description: '학생을 생성한다.' })
   async createStudent(
     @Body()
-    body,
+    body: CreateStudentRequestDto,
     @Req() req,
   ) {
     return this.studentService.create(req.user, body);

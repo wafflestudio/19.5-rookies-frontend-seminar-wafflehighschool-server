@@ -30,7 +30,7 @@ export class StudentService {
   getGuardedStudent(
     student: CreateStudentRequestDto,
   ): Omit<StudentEntity, 'id' | 'user'> {
-    const { grade, name, profile_img, email, phone, major } = student;
+    const { grade, name } = student;
     const guardedGrade = (() => {
       if (grade !== 1 && grade !== 2 && grade !== 3) {
         throw new InvalidGradeException();
@@ -45,20 +45,13 @@ export class StudentService {
       return name;
     })();
 
-    const guardedProfileImg = (() => {
-      if (typeof profile_img !== 'string' && profile_img != null) {
-        throw new BadDataException();
-      }
-      return profile_img || null;
-    })();
-
     return {
       name: guardedName,
       grade: guardedGrade,
-      profile_img: guardedProfileImg,
-      email,
-      phone,
-      major,
+      profile_img: null,
+      email: null,
+      phone: null,
+      major: null,
     };
   }
 
@@ -76,12 +69,31 @@ export class StudentService {
   }
 
   async patch(id: number, data: Partial<StudentEntity>) {
-    if (data.id || data.name || data.grade) {
+    if (data.id || data.name || data.grade || data.user) {
       throw new BadDataException();
     }
 
     if (isEmpty(data)) {
       return { success: true as const };
+    }
+
+    if (data.email) {
+      const domain = data.email.split('@');
+      if (domain.length !== 2 || domain[1] !== 'waffle.hs.kr') {
+        throw new BadDataException();
+      }
+    }
+
+    if (data.major) {
+      if (!['frontend', 'backend', 'android', 'iOS'].includes(data.major)) {
+        throw new BadDataException();
+      }
+    }
+
+    if (data.phone) {
+      if (!/[0-9]{3}-[0-9]{3,4}-[0-9]{4}/.test(data.phone)) {
+        throw new BadDataException();
+      }
     }
 
     const updateResult = await this.studentRepository.update(id, data);
@@ -92,7 +104,7 @@ export class StudentService {
     return { success: true as const };
   }
 
-  async create({ username }, student) {
+  async create({ username }, student: CreateStudentRequestDto) {
     const user: UserEntity = await this.userRepository.findOne({
       where: { username },
     });

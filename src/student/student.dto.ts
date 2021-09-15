@@ -12,39 +12,36 @@ export class CreateStudentRequestDto {
   @ApiProperty({ description: '학년', example: 2, required: true })
   @IsNumber()
   grade: number;
+}
 
+export class PatchStudentRequestDto {
   @ApiProperty({
     description: '프로필 사진 링크',
     example: 'https://wafflestudio.com',
-    required: true,
+    required: false,
   })
-  profile_img: string | null;
+  profile_img?: string;
 
   @ApiProperty({
     description: '이메일',
-    example: 'example@wafflehs.com',
-    required: true,
+    example: 'example@waffle.hs.kr',
+    required: false,
   })
-  email: string | null;
+  email?: string;
 
   @ApiProperty({
     description: '폰 번호',
     example: '000-0000-0000',
-    required: true,
+    required: false,
   })
-  phone: string | null;
+  phone?: string;
 
   @ApiProperty({
     description: '전공',
     example: 'frontend',
-    required: true,
+    required: false,
   })
-  major: 'frontend' | 'backend' | 'android' | 'iOS' | null;
-}
-
-export class PatchStudentRequestDto {
-  @ApiProperty({ description: '수정 가능한 데이터', required: false })
-  profile_img?: string;
+  major?: 'frontend' | 'backend' | 'android' | 'iOS';
 }
 
 export class PatchStudentResponseDto {

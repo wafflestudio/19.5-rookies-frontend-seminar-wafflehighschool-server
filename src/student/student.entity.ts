@@ -29,7 +29,7 @@ export class StudentEntity {
   @Column({ nullable: true })
   @ApiProperty({
     description: '이메일',
-    example: 'example@wafflehs.com',
+    example: 'example@waffle.hs.kr',
   })
   email: string;
 
