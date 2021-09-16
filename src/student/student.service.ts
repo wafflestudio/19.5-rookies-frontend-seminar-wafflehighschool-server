@@ -68,7 +68,11 @@ export class StudentService {
     return foundStudent;
   }
 
-  async patch(id: number, data: Partial<StudentEntity>) {
+  async patch({ username }, id: number, data: Partial<StudentEntity>) {
+    const user: UserEntity = await this.userRepository.findOne({
+      where: { username },
+    });
+
     if (data.id || data.name || data.grade || data.user) {
       throw new BadDataException();
     }
@@ -94,6 +98,11 @@ export class StudentService {
       if (!/[0-9]{3}-[0-9]{3,4}-[0-9]{4}/.test(data.phone)) {
         throw new BadDataException();
       }
+    }
+
+    const found = await this.studentRepository.findOne({ where: { id, user } });
+    if (!found) {
+      throw new IdNotFoundException();
     }
 
     const updateResult = await this.studentRepository.update(id, data);
@@ -124,7 +133,12 @@ export class StudentService {
     return await this.studentRepository.save(guardedStudent);
   }
 
-  async delete(id: number) {
+  async delete({ username }, id: number) {
+    const user = await this.userRepository.findOne({ where: { username } });
+    const found = await this.studentRepository.findOne({ where: { id, user } });
+    if (!found) {
+      throw new IdNotFoundException();
+    }
     const deletedResult = await this.studentRepository.delete(id);
     if (deletedResult.affected === 0) {
       throw new IdNotFoundException();

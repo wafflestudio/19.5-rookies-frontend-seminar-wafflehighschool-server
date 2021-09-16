@@ -45,7 +45,7 @@ export class StudentEntity {
     description: '전공',
     example: 'frontend',
   })
-  major: 'frontend' | 'backend' | 'android' | 'iOS';
+  major: 'frontend' | 'backend' | 'android' | 'iOS' | 'design';
 
   @ManyToOne(() => UserEntity, (user) => user.students)
   user: UserEntity;

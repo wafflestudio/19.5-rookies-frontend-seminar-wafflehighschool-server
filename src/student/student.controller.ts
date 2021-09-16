@@ -92,8 +92,9 @@ export class StudentController {
   async patchStudent(
     @Param() params,
     @Body() body,
+    @Req() req,
   ): Promise<PatchStudentResponseDto> {
-    return this.studentService.patch(params.id, body);
+    return this.studentService.patch(req.user, params.id, body);
   }
 
   @Delete(':id')
@@ -107,7 +108,10 @@ export class StudentController {
   @ApiBadRequestResponse({
     type: WrrsException,
   })
-  async deleteStudent(@Param() params): Promise<DeleteStudentResponseDto> {
-    return this.studentService.delete(params.id);
+  async deleteStudent(
+    @Param() params,
+    @Req() req,
+  ): Promise<DeleteStudentResponseDto> {
+    return this.studentService.delete(req.user, params.id);
   }
 }
