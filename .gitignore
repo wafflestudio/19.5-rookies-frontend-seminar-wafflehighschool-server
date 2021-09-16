@@ -1,5 +1,5 @@
 # compiled output
-/dist
+# 빌드하고 서버에 올려야 함 /dist
 /node_modules
 
 # Logs
