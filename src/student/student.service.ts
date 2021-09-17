@@ -24,6 +24,7 @@ export class StudentService {
     private studentRepository: Repository<StudentEntity>,
     @InjectRepository(UserEntity)
     private userRepository: Repository<UserEntity>,
+    private commentService: CommentService,
   ) {
     this.getGuardedStudent.bind(this);
   }
@@ -108,7 +109,9 @@ export class StudentService {
       throw new IdNotFoundException();
     }
 
-    // await this.commentService.create({ username }, id, { content: '' });
+    await this.commentService.create({ username }, id, {
+      content: `[정보 변경] ${username}\n${JSON.stringify(data)}`,
+    });
 
     return { success: true as const };
   }

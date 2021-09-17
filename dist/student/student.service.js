@@ -20,10 +20,12 @@ const lodash_1 = require("lodash");
 const user_entity_1 = require("../user/user.entity");
 const student_entity_1 = require("./student.entity");
 const student_exception_1 = require("./student.exception");
+const student_comment_service_1 = require("./student-comment/student-comment.service");
 let StudentService = class StudentService {
-    constructor(studentRepository, userRepository) {
+    constructor(studentRepository, userRepository, commentService) {
         this.studentRepository = studentRepository;
         this.userRepository = userRepository;
+        this.commentService = commentService;
         this.getGuardedStudent.bind(this);
     }
     getGuardedStudent(student) {
@@ -90,6 +92,9 @@ let StudentService = class StudentService {
         if (updateResult.affected === 0) {
             throw new student_exception_1.IdNotFoundException();
         }
+        await this.commentService.create({ username }, id, {
+            content: `[정보 변경] ${username}\n${JSON.stringify(data)}`,
+        });
         return { success: true };
     }
     async create({ username }, student) {
@@ -127,7 +132,8 @@ StudentService = __decorate([
     __param(0, (0, typeorm_2.InjectRepository)(student_entity_1.StudentEntity)),
     __param(1, (0, typeorm_2.InjectRepository)(user_entity_1.UserEntity)),
     __metadata("design:paramtypes", [typeorm_1.Repository,
-        typeorm_1.Repository])
+        typeorm_1.Repository,
+        student_comment_service_1.CommentService])
 ], StudentService);
 exports.StudentService = StudentService;
 //# sourceMappingURL=student.service.js.map

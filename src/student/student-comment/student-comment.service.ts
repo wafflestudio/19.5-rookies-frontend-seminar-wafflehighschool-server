@@ -4,7 +4,6 @@ import { InjectRepository } from '@nestjs/typeorm';
 
 import { StudentEntity } from '../student.entity';
 import { UserEntity } from '../../user/user.entity';
-import { ReqUserDto } from '../../user/user.dto';
 import { IdNotFoundException } from '../student.exception';
 
 import { CommentEntity } from './student-comment.entity';

@@ -3,10 +3,12 @@ import { ReqUserDto } from '../user/user.dto';
 import { UserEntity } from '../user/user.entity';
 import { StudentEntity } from './student.entity';
 import { CreateStudentRequestDto } from './student.dto';
+import { CommentService } from './student-comment/student-comment.service';
 export declare class StudentService {
     private studentRepository;
     private userRepository;
-    constructor(studentRepository: Repository<StudentEntity>, userRepository: Repository<UserEntity>);
+    private commentService;
+    constructor(studentRepository: Repository<StudentEntity>, userRepository: Repository<UserEntity>, commentService: CommentService);
     getGuardedStudent(student: CreateStudentRequestDto): {
         name: string;
         grade: 1 | 2 | 3;

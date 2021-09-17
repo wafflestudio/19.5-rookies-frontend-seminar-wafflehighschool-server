@@ -13,11 +13,15 @@ const user_entity_1 = require("../user/user.entity");
 const student_entity_1 = require("./student.entity");
 const student_controller_1 = require("./student.controller");
 const student_service_1 = require("./student.service");
+const student_comment_module_1 = require("./student-comment/student-comment.module");
 let StudentModule = class StudentModule {
 };
 StudentModule = __decorate([
     (0, common_1.Module)({
-        imports: [typeorm_1.TypeOrmModule.forFeature([student_entity_1.StudentEntity, user_entity_1.UserEntity])],
+        imports: [
+            typeorm_1.TypeOrmModule.forFeature([student_entity_1.StudentEntity, user_entity_1.UserEntity]),
+            student_comment_module_1.CommentModule,
+        ],
         controllers: [student_controller_1.StudentController],
         providers: [student_service_1.StudentService],
     })

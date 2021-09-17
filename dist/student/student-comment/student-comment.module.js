@@ -23,6 +23,7 @@ CommentModule = __decorate([
         ],
         controllers: [student_comment_controller_1.CommentController],
         providers: [student_comment_service_1.CommentService],
+        exports: [student_comment_service_1.CommentService],
     })
 ], CommentModule);
 exports.CommentModule = CommentModule;
