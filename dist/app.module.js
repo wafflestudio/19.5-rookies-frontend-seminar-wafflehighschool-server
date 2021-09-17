@@ -13,11 +13,18 @@ const app_controller_1 = require("./app.controller");
 const student_module_1 = require("./student/student.module");
 const user_module_1 = require("./user/user.module");
 const auth_module_1 = require("./auth/auth.module");
+const student_comment_module_1 = require("./student/student-comment/student-comment.module");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
     (0, common_1.Module)({
-        imports: [typeorm_1.TypeOrmModule.forRoot(), student_module_1.StudentModule, user_module_1.UserModule, auth_module_1.AuthModule],
+        imports: [
+            typeorm_1.TypeOrmModule.forRoot(),
+            student_module_1.StudentModule,
+            user_module_1.UserModule,
+            auth_module_1.AuthModule,
+            student_comment_module_1.CommentModule,
+        ],
         controllers: [app_controller_1.AppController],
         providers: [],
     })

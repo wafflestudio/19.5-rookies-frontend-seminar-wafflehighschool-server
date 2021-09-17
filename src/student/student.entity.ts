@@ -1,9 +1,16 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  ManyToOne,
+  OneToMany,
+} from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
 
 import { UserEntity } from '../user/user.entity';
 
 import { validGrade, validName } from './student.dto';
+import { CommentEntity } from './student-comment/student-comment.entity';
 
 @Entity()
 export class StudentEntity {
@@ -56,4 +63,7 @@ export class StudentEntity {
 
   @ManyToOne(() => UserEntity, (user) => user.students)
   user: UserEntity;
+
+  @OneToMany(() => CommentEntity, (comment) => comment.student)
+  comments: CommentEntity[];
 }

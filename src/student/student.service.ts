@@ -15,6 +15,7 @@ import {
   InvalidNameException,
 } from './student.exception';
 import { CreateStudentRequestDto } from './student.dto';
+import { CommentService } from './student-comment/student-comment.service';
 
 @Injectable()
 export class StudentService {
@@ -106,6 +107,8 @@ export class StudentService {
     if (updateResult.affected === 0) {
       throw new IdNotFoundException();
     }
+
+    // await this.commentService.create({ username }, id, { content: '' });
 
     return { success: true as const };
   }

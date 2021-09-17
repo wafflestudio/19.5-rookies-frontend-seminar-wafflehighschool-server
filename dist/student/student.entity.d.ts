@@ -1,5 +1,6 @@
 import { UserEntity } from '../user/user.entity';
 import { validGrade, validName } from './student.dto';
+import { CommentEntity } from './student-comment/student-comment.entity';
 export declare class StudentEntity {
     id: number;
     name: validName;
@@ -10,4 +11,5 @@ export declare class StudentEntity {
     major: 'frontend' | 'backend' | 'android' | 'iOS' | 'design';
     locked: boolean;
     user: UserEntity;
+    comments: CommentEntity[];
 }

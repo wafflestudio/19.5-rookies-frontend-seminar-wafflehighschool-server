@@ -20,7 +20,6 @@ import {
 
 import { WrrsException } from '../common/exceptions/wrrs-exception';
 import { JwtAuthGuard } from '../auth/jwt-auth-guard';
-import { UserEntity } from '../user/user.entity';
 
 import { StudentService } from './student.service';
 import { StudentEntity } from './student.entity';

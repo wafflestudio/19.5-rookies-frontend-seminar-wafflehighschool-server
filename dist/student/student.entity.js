@@ -13,6 +13,7 @@ exports.StudentEntity = void 0;
 const typeorm_1 = require("typeorm");
 const swagger_1 = require("@nestjs/swagger");
 const user_entity_1 = require("../user/user.entity");
+const student_comment_entity_1 = require("./student-comment/student-comment.entity");
 let StudentEntity = class StudentEntity {
 };
 __decorate([
@@ -74,6 +75,10 @@ __decorate([
     (0, typeorm_1.ManyToOne)(() => user_entity_1.UserEntity, (user) => user.students),
     __metadata("design:type", user_entity_1.UserEntity)
 ], StudentEntity.prototype, "user", void 0);
+__decorate([
+    (0, typeorm_1.OneToMany)(() => student_comment_entity_1.CommentEntity, (comment) => comment.student),
+    __metadata("design:type", Array)
+], StudentEntity.prototype, "comments", void 0);
 StudentEntity = __decorate([
     (0, typeorm_1.Entity)()
 ], StudentEntity);
