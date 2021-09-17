@@ -47,6 +47,13 @@ export class StudentEntity {
   })
   major: 'frontend' | 'backend' | 'android' | 'iOS' | 'design';
 
+  @Column({ nullable: false, default: false })
+  @ApiProperty({
+    description: '락',
+    example: true,
+  })
+  locked: boolean;
+
   @ManyToOne(() => UserEntity, (user) => user.students)
   user: UserEntity;
 }

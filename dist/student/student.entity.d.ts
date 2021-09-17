@@ -8,5 +8,6 @@ export declare class StudentEntity {
     email: string;
     phone: string;
     major: 'frontend' | 'backend' | 'android' | 'iOS' | 'design';
+    locked: boolean;
     user: UserEntity;
 }

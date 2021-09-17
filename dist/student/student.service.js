@@ -43,10 +43,6 @@ let StudentService = class StudentService {
         return {
             name: guardedName,
             grade: guardedGrade,
-            profile_img: null,
-            email: null,
-            phone: null,
-            major: null,
         };
     }
     async findByUser({ username }) {

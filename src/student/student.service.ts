@@ -27,9 +27,10 @@ export class StudentService {
     this.getGuardedStudent.bind(this);
   }
 
-  getGuardedStudent(
-    student: CreateStudentRequestDto,
-  ): Omit<StudentEntity, 'id' | 'user'> {
+  getGuardedStudent(student: CreateStudentRequestDto): {
+    name: string;
+    grade: 1 | 2 | 3;
+  } {
     const { grade, name } = student;
     const guardedGrade = (() => {
       if (grade !== 1 && grade !== 2 && grade !== 3) {
@@ -48,10 +49,6 @@ export class StudentService {
     return {
       name: guardedName,
       grade: guardedGrade,
-      profile_img: null,
-      email: null,
-      phone: null,
-      major: null,
     };
   }
 

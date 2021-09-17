@@ -7,7 +7,10 @@ export declare class StudentService {
     private studentRepository;
     private userRepository;
     constructor(studentRepository: Repository<StudentEntity>, userRepository: Repository<UserEntity>);
-    getGuardedStudent(student: CreateStudentRequestDto): Omit<StudentEntity, 'id' | 'user'>;
+    getGuardedStudent(student: CreateStudentRequestDto): {
+        name: string;
+        grade: 1 | 2 | 3;
+    };
     findByUser({ username }: ReqUserDto): Promise<StudentEntity[]>;
     find(id: number): Promise<StudentEntity>;
     patch({ username }: {
@@ -20,11 +23,7 @@ export declare class StudentService {
     }, student: CreateStudentRequestDto): Promise<{
         user: UserEntity;
         name: string;
-        grade: import("./student.dto").validGrade;
-        profile_img?: string;
-        email: string;
-        phone: string;
-        major: "android" | "frontend" | "backend" | "iOS" | "design";
+        grade: 1 | 2 | 3;
     } & StudentEntity>;
     delete({ username }: {
         username: any;

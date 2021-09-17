@@ -9,11 +9,7 @@ export declare class StudentController {
     createStudent(body: CreateStudentRequestDto, req: any): Promise<{
         user: UserEntity;
         name: string;
-        grade: import("./student.dto").validGrade;
-        profile_img?: string;
-        email: string;
-        phone: string;
-        major: "android" | "frontend" | "backend" | "iOS" | "design";
+        grade: 1 | 2 | 3;
     } & StudentEntity>;
     getStudent(params: any): Promise<StudentEntity>;
     patchStudent(params: any, body: any, req: any): Promise<PatchStudentResponseDto>;

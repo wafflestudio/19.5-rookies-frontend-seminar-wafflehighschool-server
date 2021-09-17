@@ -63,6 +63,14 @@ __decorate([
     __metadata("design:type", String)
 ], StudentEntity.prototype, "major", void 0);
 __decorate([
+    (0, typeorm_1.Column)({ nullable: false, default: false }),
+    (0, swagger_1.ApiProperty)({
+        description: '락',
+        example: true,
+    }),
+    __metadata("design:type", Boolean)
+], StudentEntity.prototype, "locked", void 0);
+__decorate([
     (0, typeorm_1.ManyToOne)(() => user_entity_1.UserEntity, (user) => user.students),
     __metadata("design:type", user_entity_1.UserEntity)
 ], StudentEntity.prototype, "user", void 0);
