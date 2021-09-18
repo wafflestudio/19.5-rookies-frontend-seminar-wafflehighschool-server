@@ -18,8 +18,8 @@
 
 # API
 
-- [DOC](http://3.37.177.127:5000/swagger)
-- base_url: `http://3.37.177.127:5000/v1/`
+- [DOC](https://p04fpgjlo3.execute-api.ap-northeast-2.amazonaws.com/swagger)
+- base_url: `https://p04fpgjlo3.execute-api.ap-northeast-2.amazonaws.com/v1/`
 
 # 비고
 
