@@ -30,7 +30,15 @@ let CommentService = class CommentService {
         const student = await this.studentRepository.findOne({ where: { id } });
         return await this.commentRepository.find({ where: { student } });
     }
-    async create({ username }, id, { content }) {
+    async create({ username }, id, data) {
+        Object.keys(data).forEach((key) => {
+            if (!['content'].includes(key)) {
+                throw new student_exception_1.BadDataException();
+            }
+        });
+        if (!data.content) {
+            throw new student_exception_1.BadDataException();
+        }
         const user = await this.userRepository.findOne({ where: { username } });
         const student = await this.studentRepository.findOne({
             where: { id, user },
@@ -38,7 +46,10 @@ let CommentService = class CommentService {
         if (!student) {
             throw new student_exception_1.IdNotFoundException();
         }
-        return await this.commentRepository.save({ content, student });
+        return await this.commentRepository.save({
+            content: data.content,
+            student,
+        });
     }
 };
 CommentService = __decorate([

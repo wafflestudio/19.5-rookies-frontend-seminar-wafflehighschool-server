@@ -33,6 +33,7 @@ __decorate([
         example: 'https://wafflestudio.com',
         required: false,
     }),
+    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], PatchStudentRequestDto.prototype, "profile_img", void 0);
 __decorate([
@@ -41,6 +42,7 @@ __decorate([
         example: 'example@waffle.hs.kr',
         required: false,
     }),
+    (0, class_validator_1.IsEmail)(),
     __metadata("design:type", String)
 ], PatchStudentRequestDto.prototype, "email", void 0);
 __decorate([
@@ -49,6 +51,7 @@ __decorate([
         example: '000-0000-0000',
         required: false,
     }),
+    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], PatchStudentRequestDto.prototype, "phone", void 0);
 __decorate([
@@ -57,6 +60,7 @@ __decorate([
         example: 'frontend',
         required: false,
     }),
+    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], PatchStudentRequestDto.prototype, "major", void 0);
 exports.PatchStudentRequestDto = PatchStudentRequestDto;

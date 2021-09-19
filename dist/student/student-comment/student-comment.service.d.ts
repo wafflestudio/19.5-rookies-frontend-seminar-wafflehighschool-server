@@ -10,7 +10,7 @@ export declare class CommentService {
     findByStudent(id: number): Promise<CommentEntity[]>;
     create({ username }: {
         username: any;
-    }, id: number, { content }: {
+    }, id: number, data: {
         content: string;
     }): Promise<any>;
 }

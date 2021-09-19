@@ -4,7 +4,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 
 import { StudentEntity } from '../student.entity';
 import { UserEntity } from '../../user/user.entity';
-import { IdNotFoundException } from '../student.exception';
+import { BadDataException, IdNotFoundException } from '../student.exception';
 
 import { CommentEntity } from './student-comment.entity';
 
@@ -27,8 +27,18 @@ export class CommentService {
   async create(
     { username },
     id: number,
-    { content }: { content: string },
+    data: { content: string },
   ): Promise<any> {
+    Object.keys(data).forEach((key) => {
+      if (!['content'].includes(key)) {
+        throw new BadDataException();
+      }
+    });
+
+    if (!data.content) {
+      throw new BadDataException();
+    }
+
     const user = await this.userRepository.findOne({ where: { username } });
     const student = await this.studentRepository.findOne({
       where: { id, user },
@@ -38,6 +48,9 @@ export class CommentService {
       throw new IdNotFoundException();
     }
 
-    return await this.commentRepository.save({ content, student });
+    return await this.commentRepository.save({
+      content: data.content,
+      student,
+    });
   }
 }

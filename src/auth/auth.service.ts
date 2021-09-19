@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 
 import { UserService } from '../user/user.service';
+import { BadDataException } from '../student/student.exception';
 
 @Injectable()
 export class AuthService {
@@ -21,6 +22,12 @@ export class AuthService {
   }
 
   async login(user: any) {
+    Object.keys(user).forEach((key) => {
+      if (!['username', 'password'].includes(key)) {
+        throw new BadDataException();
+      }
+    });
+
     const payload = { username: user.username, sub: user.userId };
     return {
       access_token: this.jwtService.sign(payload),

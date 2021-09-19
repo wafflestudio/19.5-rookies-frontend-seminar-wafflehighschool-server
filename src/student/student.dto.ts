@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNumber, IsString } from 'class-validator';
+import { IsEmail, IsNumber, IsString } from 'class-validator';
 
 export type validGrade = 1 | 2 | 3;
 export type validName = string;
@@ -20,6 +20,7 @@ export class PatchStudentRequestDto {
     example: 'https://wafflestudio.com',
     required: false,
   })
+  @IsString()
   profile_img?: string;
 
   @ApiProperty({
@@ -27,6 +28,7 @@ export class PatchStudentRequestDto {
     example: 'example@waffle.hs.kr',
     required: false,
   })
+  @IsEmail()
   email?: string;
 
   @ApiProperty({
@@ -34,6 +36,7 @@ export class PatchStudentRequestDto {
     example: '000-0000-0000',
     required: false,
   })
+  @IsString()
   phone?: string;
 
   @ApiProperty({
@@ -41,7 +44,8 @@ export class PatchStudentRequestDto {
     example: 'frontend',
     required: false,
   })
-  major?: 'frontend' | 'backend' | 'android' | 'iOS';
+  @IsString()
+  major?: 'frontend' | 'backend' | 'android' | 'iOS' | null;
 }
 
 export class PatchStudentResponseDto {

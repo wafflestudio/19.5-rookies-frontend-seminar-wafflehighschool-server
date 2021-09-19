@@ -8,7 +8,7 @@ export declare class PatchStudentRequestDto {
     profile_img?: string;
     email?: string;
     phone?: string;
-    major?: 'frontend' | 'backend' | 'android' | 'iOS';
+    major?: 'frontend' | 'backend' | 'android' | 'iOS' | null;
 }
 export declare class PatchStudentResponseDto {
     success: true;

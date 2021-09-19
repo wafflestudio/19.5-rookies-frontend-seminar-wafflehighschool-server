@@ -14,7 +14,7 @@ import {
   InvalidGradeException,
   InvalidNameException,
 } from './student.exception';
-import { CreateStudentRequestDto } from './student.dto';
+import { CreateStudentRequestDto, PatchStudentRequestDto } from './student.dto';
 import { CommentService } from './student-comment/student-comment.service';
 
 @Injectable()
@@ -67,17 +67,19 @@ export class StudentService {
     return foundStudent;
   }
 
-  async patch({ username }, id: number, data: Partial<StudentEntity>) {
+  async patch({ username }, id: number, data: PatchStudentRequestDto) {
     const user: UserEntity = await this.userRepository.findOne({
       where: { username },
     });
 
-    if (data.id || data.name || data.grade || data.user) {
-      throw new BadDataException();
-    }
+    Object.keys(data).forEach((key) => {
+      if (!['profile_img', 'email', 'phone', 'major', 'locked'].includes(key)) {
+        throw new BadDataException();
+      }
+    });
 
     if (isEmpty(data)) {
-      return { success: true as const };
+      throw new BadDataException();
     }
 
     if (data.email) {
@@ -88,7 +90,9 @@ export class StudentService {
     }
 
     if (data.major) {
-      if (!['frontend', 'backend', 'android', 'iOS'].includes(data.major)) {
+      if (
+        !['frontend', 'backend', 'android', 'iOS', null].includes(data.major)
+      ) {
         throw new BadDataException();
       }
     }
@@ -117,6 +121,12 @@ export class StudentService {
   }
 
   async create({ username }, student: CreateStudentRequestDto) {
+    Object.keys(student).forEach((key) => {
+      if (!['name', 'grade'].includes(key)) {
+        throw new BadDataException();
+      }
+    });
+
     const user: UserEntity = await this.userRepository.findOne({
       where: { username },
     });

@@ -62,11 +62,13 @@ let StudentService = class StudentService {
         const user = await this.userRepository.findOne({
             where: { username },
         });
-        if (data.id || data.name || data.grade || data.user) {
-            throw new student_exception_1.BadDataException();
-        }
+        Object.keys(data).forEach((key) => {
+            if (!['profile_img', 'email', 'phone', 'major', 'locked'].includes(key)) {
+                throw new student_exception_1.BadDataException();
+            }
+        });
         if ((0, lodash_1.isEmpty)(data)) {
-            return { success: true };
+            throw new student_exception_1.BadDataException();
         }
         if (data.email) {
             const domain = data.email.split('@');
@@ -75,7 +77,7 @@ let StudentService = class StudentService {
             }
         }
         if (data.major) {
-            if (!['frontend', 'backend', 'android', 'iOS'].includes(data.major)) {
+            if (!['frontend', 'backend', 'android', 'iOS', null].includes(data.major)) {
                 throw new student_exception_1.BadDataException();
             }
         }
@@ -98,6 +100,11 @@ let StudentService = class StudentService {
         return { success: true };
     }
     async create({ username }, student) {
+        Object.keys(student).forEach((key) => {
+            if (!['name', 'grade'].includes(key)) {
+                throw new student_exception_1.BadDataException();
+            }
+        });
         const user = await this.userRepository.findOne({
             where: { username },
         });

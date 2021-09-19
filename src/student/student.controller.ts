@@ -57,11 +57,7 @@ export class StudentController {
     type: WrrsException,
   })
   @ApiOperation({ summary: '학생 생성', description: '학생을 생성한다.' })
-  async createStudent(
-    @Body()
-    body: CreateStudentRequestDto,
-    @Req() req,
-  ) {
+  async createStudent(@Body() body, @Req() req) {
     return this.studentService.create(req.user, body);
   }
 
