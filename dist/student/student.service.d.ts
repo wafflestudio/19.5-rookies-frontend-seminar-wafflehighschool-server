@@ -23,10 +23,8 @@ export declare class StudentService {
     create({ username }: {
         username: any;
     }, student: CreateStudentRequestDto): Promise<{
-        user: UserEntity;
-        name: string;
-        grade: 1 | 2 | 3;
-    } & StudentEntity>;
+        success: boolean;
+    }>;
     delete({ username }: {
         username: any;
     }, id: number): Promise<{

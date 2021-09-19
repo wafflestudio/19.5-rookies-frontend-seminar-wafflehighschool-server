@@ -11,6 +11,9 @@ export declare class PatchStudentRequestDto {
     phone?: string;
     major?: 'frontend' | 'backend' | 'android' | 'iOS' | null;
 }
+export declare class CreateStudentResponseDto {
+    success: true;
+}
 export declare class PatchStudentResponseDto {
     success: true;
 }

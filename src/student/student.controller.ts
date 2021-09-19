@@ -22,9 +22,9 @@ import { WrrsException } from '../common/exceptions/wrrs-exception';
 import { JwtAuthGuard } from '../auth/jwt-auth-guard';
 
 import { StudentService } from './student.service';
-import { StudentEntity } from './student.entity';
 import {
   CreateStudentRequestDto,
+  CreateStudentResponseDto,
   DeleteStudentResponseDto,
   GetStudentDetailResponseDto,
   GetStudentSummaryResponseDto,
@@ -54,7 +54,7 @@ export class StudentController {
 
   @Post()
   @ApiBody({ type: CreateStudentRequestDto })
-  @ApiCreatedResponse({ description: '성공', type: StudentEntity })
+  @ApiCreatedResponse({ description: '성공', type: CreateStudentResponseDto })
   @ApiBadRequestResponse({
     description:
       '올바르지 않은 학년 / 이름, 해당 학년에 동명이인 존재, 올바르지 않은 필드 존재',

@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.GetStudentDetailResponseDto = exports.GetStudentSummaryResponseDto = exports.DeleteStudentResponseDto = exports.PatchStudentResponseDto = exports.PatchStudentRequestDto = exports.CreateStudentRequestDto = void 0;
+exports.GetStudentDetailResponseDto = exports.GetStudentSummaryResponseDto = exports.DeleteStudentResponseDto = exports.PatchStudentResponseDto = exports.CreateStudentResponseDto = exports.PatchStudentRequestDto = exports.CreateStudentRequestDto = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 class CreateStudentRequestDto {
@@ -64,6 +64,13 @@ __decorate([
     __metadata("design:type", String)
 ], PatchStudentRequestDto.prototype, "major", void 0);
 exports.PatchStudentRequestDto = PatchStudentRequestDto;
+class CreateStudentResponseDto {
+}
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: '성공 여부' }),
+    __metadata("design:type", Boolean)
+], CreateStudentResponseDto.prototype, "success", void 0);
+exports.CreateStudentResponseDto = CreateStudentResponseDto;
 class PatchStudentResponseDto {
 }
 __decorate([

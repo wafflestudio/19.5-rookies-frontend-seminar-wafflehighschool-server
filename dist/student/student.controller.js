@@ -18,7 +18,6 @@ const swagger_1 = require("@nestjs/swagger");
 const wrrs_exception_1 = require("../common/exceptions/wrrs-exception");
 const jwt_auth_guard_1 = require("../auth/jwt-auth-guard");
 const student_service_1 = require("./student.service");
-const student_entity_1 = require("./student.entity");
 const student_dto_1 = require("./student.dto");
 let StudentController = class StudentController {
     constructor(studentService) {
@@ -58,7 +57,7 @@ __decorate([
 __decorate([
     (0, common_1.Post)(),
     (0, swagger_1.ApiBody)({ type: student_dto_1.CreateStudentRequestDto }),
-    (0, swagger_1.ApiCreatedResponse)({ description: '성공', type: student_entity_1.StudentEntity }),
+    (0, swagger_1.ApiCreatedResponse)({ description: '성공', type: student_dto_1.CreateStudentResponseDto }),
     (0, swagger_1.ApiBadRequestResponse)({
         description: '올바르지 않은 학년 / 이름, 해당 학년에 동명이인 존재, 올바르지 않은 필드 존재',
         type: wrrs_exception_1.WrrsException,

@@ -157,7 +157,9 @@ export class StudentService {
       throw new DuplicatedStudentException();
     }
 
-    return await this.studentRepository.save(guardedStudent);
+    await this.studentRepository.save(guardedStudent);
+
+    return { success: true };
   }
 
   async delete({ username }, id: number) {

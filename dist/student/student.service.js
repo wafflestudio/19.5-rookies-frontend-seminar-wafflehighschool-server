@@ -125,7 +125,8 @@ let StudentService = class StudentService {
         if (foundStudent) {
             throw new student_exception_1.DuplicatedStudentException();
         }
-        return await this.studentRepository.save(guardedStudent);
+        await this.studentRepository.save(guardedStudent);
+        return { success: true };
     }
     async delete({ username }, id) {
         const user = await this.userRepository.findOne({ where: { username } });

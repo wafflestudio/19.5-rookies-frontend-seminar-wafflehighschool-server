@@ -49,6 +49,11 @@ export class PatchStudentRequestDto {
   major?: 'frontend' | 'backend' | 'android' | 'iOS' | null;
 }
 
+export class CreateStudentResponseDto {
+  @ApiProperty({ description: '성공 여부' })
+  success: true;
+}
+
 export class PatchStudentResponseDto {
   @ApiProperty({ description: '성공 여부' })
   success: true;
