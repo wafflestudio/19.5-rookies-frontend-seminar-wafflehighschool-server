@@ -47,12 +47,18 @@ let StudentService = class StudentService {
             grade: guardedGrade,
         };
     }
-    async findByUser({ username }) {
+    async findByUser({ username, }) {
         const user = await this.userRepository.findOne({ where: { username } });
-        return this.studentRepository.find({ where: { user } });
+        const students = await this.studentRepository.find({
+            where: { user },
+            select: ['id', 'name', 'grade'],
+        });
+        return students;
     }
     async find(id) {
-        const foundStudent = await this.studentRepository.findOne(id);
+        const foundStudent = await this.studentRepository.findOne(id, {
+            select: ['id', 'grade', 'locked', 'name', 'phone', 'major', 'email'],
+        });
         if (!foundStudent) {
             throw new student_exception_1.IdNotFoundException();
         }

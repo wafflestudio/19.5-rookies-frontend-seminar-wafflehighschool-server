@@ -16,8 +16,8 @@ exports.CommentController = void 0;
 const common_1 = require("@nestjs/common");
 const swagger_1 = require("@nestjs/swagger");
 const jwt_auth_guard_1 = require("../../auth/jwt-auth-guard");
-const student_entity_1 = require("../student.entity");
 const student_comment_service_1 = require("./student-comment.service");
+const student_comment_dto_1 = require("./student-comment.dto");
 let CommentController = class CommentController {
     constructor(commentService) {
         this.commentService = commentService;
@@ -37,7 +37,7 @@ __decorate([
     }),
     (0, swagger_1.ApiOkResponse)({
         isArray: true,
-        type: student_entity_1.StudentEntity,
+        type: student_comment_dto_1.GetCommentResponseDto,
     }),
     __param(0, (0, common_1.Param)()),
     __metadata("design:type", Function),
@@ -49,6 +49,12 @@ __decorate([
     (0, swagger_1.ApiOperation)({
         summary: '학생 댓글 작성 API',
         description: '해당 학생에 댓글을 작성한다.',
+    }),
+    (0, swagger_1.ApiBody)({
+        type: student_comment_dto_1.CreateCommentRequestDto,
+    }),
+    (0, swagger_1.ApiOkResponse)({
+        type: student_comment_dto_1.CreateCommentResponseDto,
     }),
     __param(0, (0, common_1.Param)()),
     __param(1, (0, common_1.Req)()),

@@ -26,6 +26,8 @@ import { StudentEntity } from './student.entity';
 import {
   CreateStudentRequestDto,
   DeleteStudentResponseDto,
+  GetStudentDetailResponseDto,
+  GetStudentSummaryResponseDto,
   PatchStudentRequestDto,
   PatchStudentResponseDto,
 } from './student.dto';
@@ -39,13 +41,14 @@ export class StudentController {
   @Get()
   @ApiOperation({
     summary: '학생 정보 API',
-    description: '모든 학생의 정보를 불러온다.',
+    description:
+      '현재 로그인된 유저에게 연결된 모든 학생의 요약된 정보를 불러온다.',
   })
   @ApiOkResponse({
     isArray: true,
-    type: StudentEntity,
+    type: GetStudentSummaryResponseDto,
   })
-  async getStudents(@Req() req): Promise<StudentEntity[]> {
+  async getStudents(@Req() req): Promise<GetStudentSummaryResponseDto[]> {
     return this.studentService.findByUser(req.user);
   }
 
@@ -53,7 +56,8 @@ export class StudentController {
   @ApiBody({ type: CreateStudentRequestDto })
   @ApiCreatedResponse({ description: '성공', type: StudentEntity })
   @ApiBadRequestResponse({
-    description: '올바르지 않은 학년, 이름 혹은 동명이인 존재',
+    description:
+      '올바르지 않은 학년 / 이름, 해당 학년에 동명이인 존재, 올바르지 않은 필드 존재',
     type: WrrsException,
   })
   @ApiOperation({ summary: '학생 생성', description: '학생을 생성한다.' })
@@ -64,20 +68,20 @@ export class StudentController {
   @Get(':id')
   @ApiOperation({
     summary: '학생 정보 가져오기',
-    description: 'id를 이용하여 학생의 정보를 불러온다.',
+    description: 'id를 이용하여 학생의 자세한 정보를 불러온다.',
   })
   @ApiOkResponse({
-    type: StudentEntity,
+    type: GetStudentDetailResponseDto,
   })
   @ApiBadRequestResponse({ type: WrrsException })
-  getStudent(@Param() params): Promise<StudentEntity> {
+  getStudent(@Param() params): Promise<GetStudentDetailResponseDto> {
     return this.studentService.find(params.id);
   }
 
   @Patch(':id')
   @ApiOperation({
     summary: '학생 정보 수정하기',
-    description: '학생의 정보를 수정한다.',
+    description: '학생의 정보를 수정한다. 빈 값이면 null을 보내야 한다.',
   })
   @ApiBody({ type: PatchStudentRequestDto })
   @ApiOkResponse({

@@ -2,7 +2,7 @@ import { Repository } from 'typeorm';
 import { ReqUserDto } from '../user/user.dto';
 import { UserEntity } from '../user/user.entity';
 import { StudentEntity } from './student.entity';
-import { CreateStudentRequestDto, PatchStudentRequestDto } from './student.dto';
+import { CreateStudentRequestDto, GetStudentDetailResponseDto, GetStudentSummaryResponseDto, PatchStudentRequestDto } from './student.dto';
 import { CommentService } from './student-comment/student-comment.service';
 export declare class StudentService {
     private studentRepository;
@@ -13,8 +13,8 @@ export declare class StudentService {
         name: string;
         grade: 1 | 2 | 3;
     };
-    findByUser({ username }: ReqUserDto): Promise<StudentEntity[]>;
-    find(id: number): Promise<StudentEntity>;
+    findByUser({ username, }: ReqUserDto): Promise<GetStudentSummaryResponseDto[]>;
+    find(id: number): Promise<GetStudentDetailResponseDto>;
     patch({ username }: {
         username: any;
     }, id: number, data: PatchStudentRequestDto): Promise<{

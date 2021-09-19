@@ -7,6 +7,7 @@ import { UserEntity } from '../../user/user.entity';
 import { BadDataException, IdNotFoundException } from '../student.exception';
 
 import { CommentEntity } from './student-comment.entity';
+import { GetCommentResponseDto } from './student-comment.dto';
 
 @Injectable()
 export class CommentService {
@@ -19,9 +20,13 @@ export class CommentService {
     private commentRepository: Repository<CommentEntity>,
   ) {}
 
-  async findByStudent(id: number): Promise<CommentEntity[]> {
+  async findByStudent(id: number): Promise<GetCommentResponseDto[]> {
     const student = await this.studentRepository.findOne({ where: { id } });
-    return await this.commentRepository.find({ where: { student } });
+    const comments = await this.commentRepository.find({
+      where: { student },
+      select: ['id', 'content', 'datetime'],
+    });
+    return comments as GetCommentResponseDto[];
   }
 
   async create(
@@ -48,9 +53,11 @@ export class CommentService {
       throw new IdNotFoundException();
     }
 
-    return await this.commentRepository.save({
+    await this.commentRepository.save({
       content: data.content,
       student,
     });
+
+    return { success: true };
   }
 }

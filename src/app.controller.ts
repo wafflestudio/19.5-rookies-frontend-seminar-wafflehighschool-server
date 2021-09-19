@@ -1,22 +1,18 @@
-import { Controller, Get, Post, UseGuards, Request } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import { Controller, Get } from '@nestjs/common';
+import { ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 
-import { LocalAuthGuard } from './auth/local-auth-guard';
-import { AuthService } from './auth/auth.service';
-
-@Controller()
 @ApiTags('ping')
+@Controller()
 export class AppController {
-  constructor(private authService: AuthService) {}
-
   @Get()
-  getHello(): string {
+  @ApiOperation({
+    summary: '핑퐁',
+    description: '연결 잘 됐는지 확인하는 핑퐁',
+  })
+  @ApiOkResponse({
+    type: 'pong',
+  })
+  async getHello(): Promise<'pong'> {
     return 'pong';
-  }
-
-  @UseGuards(LocalAuthGuard)
-  @Post('v1/auth/login')
-  async login(@Request() req) {
-    return this.authService.login(req.user);
   }
 }

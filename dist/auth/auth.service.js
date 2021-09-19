@@ -24,7 +24,6 @@ exports.AuthService = void 0;
 const common_1 = require("@nestjs/common");
 const jwt_1 = require("@nestjs/jwt");
 const user_service_1 = require("../user/user.service");
-const student_exception_1 = require("../student/student.exception");
 let AuthService = class AuthService {
     constructor(usersService, jwtService) {
         this.usersService = usersService;
@@ -39,11 +38,6 @@ let AuthService = class AuthService {
         return null;
     }
     async login(user) {
-        Object.keys(user).forEach((key) => {
-            if (!['username', 'password'].includes(key)) {
-                throw new student_exception_1.BadDataException();
-            }
-        });
         const payload = { username: user.username, sub: user.userId };
         return {
             access_token: this.jwtService.sign(payload),

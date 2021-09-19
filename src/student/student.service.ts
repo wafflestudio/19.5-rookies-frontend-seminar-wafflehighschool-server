@@ -14,7 +14,12 @@ import {
   InvalidGradeException,
   InvalidNameException,
 } from './student.exception';
-import { CreateStudentRequestDto, PatchStudentRequestDto } from './student.dto';
+import {
+  CreateStudentRequestDto,
+  GetStudentDetailResponseDto,
+  GetStudentSummaryResponseDto,
+  PatchStudentRequestDto,
+} from './student.dto';
 import { CommentService } from './student-comment/student-comment.service';
 
 @Injectable()
@@ -54,17 +59,26 @@ export class StudentService {
     };
   }
 
-  async findByUser({ username }: ReqUserDto): Promise<StudentEntity[]> {
+  async findByUser({
+    username,
+  }: ReqUserDto): Promise<GetStudentSummaryResponseDto[]> {
     const user = await this.userRepository.findOne({ where: { username } });
-    return this.studentRepository.find({ where: { user } });
+    const students = await this.studentRepository.find({
+      where: { user },
+      select: ['id', 'name', 'grade'],
+    });
+
+    return students as GetStudentSummaryResponseDto[];
   }
 
-  async find(id: number): Promise<StudentEntity> {
-    const foundStudent = await this.studentRepository.findOne(id);
+  async find(id: number): Promise<GetStudentDetailResponseDto> {
+    const foundStudent = await this.studentRepository.findOne(id, {
+      select: ['id', 'grade', 'locked', 'name', 'phone', 'major', 'email'],
+    });
     if (!foundStudent) {
       throw new IdNotFoundException();
     }
-    return foundStudent;
+    return foundStudent as GetStudentDetailResponseDto;
   }
 
   async patch({ username }, id: number, data: PatchStudentRequestDto) {

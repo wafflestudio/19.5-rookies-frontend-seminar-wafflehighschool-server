@@ -28,7 +28,11 @@ let CommentService = class CommentService {
     }
     async findByStudent(id) {
         const student = await this.studentRepository.findOne({ where: { id } });
-        return await this.commentRepository.find({ where: { student } });
+        const comments = await this.commentRepository.find({
+            where: { student },
+            select: ['id', 'content', 'datetime'],
+        });
+        return comments;
     }
     async create({ username }, id, data) {
         Object.keys(data).forEach((key) => {
@@ -46,10 +50,11 @@ let CommentService = class CommentService {
         if (!student) {
             throw new student_exception_1.IdNotFoundException();
         }
-        return await this.commentRepository.save({
+        await this.commentRepository.save({
             content: data.content,
             student,
         });
+        return { success: true };
     }
 };
 CommentService = __decorate([

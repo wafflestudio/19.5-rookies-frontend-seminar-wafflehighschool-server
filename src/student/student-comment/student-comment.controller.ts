@@ -7,13 +7,18 @@ import {
   Req,
   UseGuards,
 } from '@nestjs/common';
-import { ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
+import { ApiBody, ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 
 import { JwtAuthGuard } from '../../auth/jwt-auth-guard';
 import { StudentEntity } from '../student.entity';
 
 import { CommentEntity } from './student-comment.entity';
 import { CommentService } from './student-comment.service';
+import {
+  CreateCommentRequestDto,
+  CreateCommentResponseDto,
+  GetCommentResponseDto,
+} from './student-comment.dto';
 
 @UseGuards(JwtAuthGuard)
 @Controller('v1/student/:id/comment')
@@ -28,9 +33,9 @@ export class CommentController {
   })
   @ApiOkResponse({
     isArray: true,
-    type: StudentEntity,
+    type: GetCommentResponseDto,
   })
-  async getComments(@Param() param): Promise<CommentEntity[]> {
+  async getComments(@Param() param): Promise<GetCommentResponseDto[]> {
     return await this.commentService.findByStudent(param.id);
   }
 
@@ -39,7 +44,17 @@ export class CommentController {
     summary: '학생 댓글 작성 API',
     description: '해당 학생에 댓글을 작성한다.',
   })
-  async createComment(@Param() param, @Req() req, @Body() body) {
+  @ApiBody({
+    type: CreateCommentRequestDto,
+  })
+  @ApiOkResponse({
+    type: CreateCommentResponseDto,
+  })
+  async createComment(
+    @Param() param,
+    @Req() req,
+    @Body() body,
+  ): Promise<CreateCommentResponseDto> {
     return await this.commentService.create(req.user, param.id, body);
   }
 }
