@@ -111,6 +111,14 @@ __decorate([
     }),
     __metadata("design:type", Number)
 ], GetStudentSummaryResponseDto.prototype, "grade", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        description: '프로필 사진 링크',
+        example: 'https://wafflestudio.com',
+        required: false,
+    }),
+    __metadata("design:type", String)
+], GetStudentSummaryResponseDto.prototype, "profile_img", void 0);
 exports.GetStudentSummaryResponseDto = GetStudentSummaryResponseDto;
 class GetStudentDetailResponseDto extends GetStudentSummaryResponseDto {
 }

@@ -24,6 +24,7 @@ export declare class GetStudentSummaryResponseDto {
     id: number;
     name: string;
     grade: 1 | 2 | 3;
+    profile_img: string | null;
 }
 export declare class GetStudentDetailResponseDto extends GetStudentSummaryResponseDto {
     profile_img: string | null;

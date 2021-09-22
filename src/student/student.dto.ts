@@ -85,6 +85,13 @@ export class GetStudentSummaryResponseDto {
     nullable: false,
   })
   grade: 1 | 2 | 3;
+
+  @ApiProperty({
+    description: '프로필 사진 링크',
+    example: 'https://wafflestudio.com',
+    required: false,
+  })
+  profile_img: string | null;
 }
 
 export class GetStudentDetailResponseDto extends GetStudentSummaryResponseDto {

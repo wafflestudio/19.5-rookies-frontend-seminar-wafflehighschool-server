@@ -51,7 +51,7 @@ let StudentService = class StudentService {
         const user = await this.userRepository.findOne({ where: { username } });
         const students = await this.studentRepository.find({
             where: { user },
-            select: ['id', 'name', 'grade'],
+            select: ['id', 'name', 'grade', 'profile_img'],
         });
         return students;
     }
