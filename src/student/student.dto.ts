@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsEmail, IsNumber, IsString } from 'class-validator';
+import { IsBoolean, IsEmail, IsNumber, IsString } from 'class-validator';
 
 export type validGrade = 1 | 2 | 3;
 export type validName = string;
@@ -47,6 +47,14 @@ export class PatchStudentRequestDto {
   })
   @IsString()
   major?: 'frontend' | 'backend' | 'android' | 'iOS' | null;
+
+  @ApiProperty({
+    description: '잠김 여부',
+    example: false,
+    required: false,
+  })
+  @IsBoolean()
+  locked?: boolean;
 }
 
 export class CreateStudentResponseDto {

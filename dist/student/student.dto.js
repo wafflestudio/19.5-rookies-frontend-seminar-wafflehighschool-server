@@ -63,6 +63,15 @@ __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], PatchStudentRequestDto.prototype, "major", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        description: '잠김 여부',
+        example: false,
+        required: false,
+    }),
+    (0, class_validator_1.IsBoolean)(),
+    __metadata("design:type", Boolean)
+], PatchStudentRequestDto.prototype, "locked", void 0);
 exports.PatchStudentRequestDto = PatchStudentRequestDto;
 class CreateStudentResponseDto {
 }
