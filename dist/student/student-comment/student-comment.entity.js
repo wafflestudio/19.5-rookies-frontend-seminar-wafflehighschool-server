@@ -29,7 +29,9 @@ __decorate([
     __metadata("design:type", String)
 ], CommentEntity.prototype, "content", void 0);
 __decorate([
-    (0, typeorm_1.ManyToOne)(() => student_entity_1.StudentEntity, (student) => student.comments),
+    (0, typeorm_1.ManyToOne)(() => student_entity_1.StudentEntity, (student) => student.comments, {
+        onDelete: 'CASCADE',
+    }),
     __metadata("design:type", student_entity_1.StudentEntity)
 ], CommentEntity.prototype, "student", void 0);
 __decorate([

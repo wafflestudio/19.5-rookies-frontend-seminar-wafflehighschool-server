@@ -76,7 +76,9 @@ __decorate([
     __metadata("design:type", user_entity_1.UserEntity)
 ], StudentEntity.prototype, "user", void 0);
 __decorate([
-    (0, typeorm_1.OneToMany)(() => student_comment_entity_1.CommentEntity, (comment) => comment.student),
+    (0, typeorm_1.OneToMany)(() => student_comment_entity_1.CommentEntity, (comment) => comment.student, {
+        cascade: true,
+    }),
     __metadata("design:type", Array)
 ], StudentEntity.prototype, "comments", void 0);
 StudentEntity = __decorate([

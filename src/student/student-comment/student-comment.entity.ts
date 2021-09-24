@@ -22,7 +22,9 @@ export class CommentEntity {
   })
   content: string;
 
-  @ManyToOne(() => StudentEntity, (student) => student.comments)
+  @ManyToOne(() => StudentEntity, (student) => student.comments, {
+    onDelete: 'CASCADE',
+  })
   student: StudentEntity;
 
   @CreateDateColumn()
