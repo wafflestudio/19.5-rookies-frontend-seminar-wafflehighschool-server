@@ -47,14 +47,6 @@ export class PatchStudentRequestDto {
   })
   @IsString()
   major?: 'frontend' | 'backend' | 'android' | 'iOS' | null;
-
-  @ApiProperty({
-    description: '잠김 여부',
-    example: false,
-    required: false,
-  })
-  @IsBoolean()
-  locked?: boolean;
 }
 
 export class CreateStudentResponseDto {

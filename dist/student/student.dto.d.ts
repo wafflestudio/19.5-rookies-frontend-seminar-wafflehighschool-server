@@ -10,7 +10,6 @@ export declare class PatchStudentRequestDto {
     email?: string;
     phone?: string;
     major?: 'frontend' | 'backend' | 'android' | 'iOS' | null;
-    locked?: boolean;
 }
 export declare class CreateStudentResponseDto {
     success: true;

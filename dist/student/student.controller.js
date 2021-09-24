@@ -32,6 +32,12 @@ let StudentController = class StudentController {
     getStudent(params) {
         return this.studentService.find(params.id);
     }
+    async lockStudent(params, req) {
+        return this.studentService.setLock(req.user, params.id, true);
+    }
+    async unlockStudent(params, req) {
+        return this.studentService.setLock(req.user, params.id, false);
+    }
     async patchStudent(params, body, req) {
         return this.studentService.patch(req.user, params.id, body);
     }
@@ -84,6 +90,38 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], StudentController.prototype, "getStudent", null);
+__decorate([
+    (0, common_1.Post)(':id/lock'),
+    (0, swagger_1.ApiOperation)({
+        summary: '학생 잠그기',
+        description: '해당 id의 학생을 잠근다.',
+    }),
+    (0, swagger_1.ApiOkResponse)({
+        type: student_dto_1.PatchStudentResponseDto,
+    }),
+    (0, swagger_1.ApiBadRequestResponse)({ type: wrrs_exception_1.WrrsException }),
+    __param(0, (0, common_1.Param)()),
+    __param(1, (0, common_1.Req)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:returntype", Promise)
+], StudentController.prototype, "lockStudent", null);
+__decorate([
+    (0, common_1.Post)(':id/unlock'),
+    (0, swagger_1.ApiOperation)({
+        summary: '학생 잠금 해제',
+        description: '해당 id의 학생을 잠금 해제한다.',
+    }),
+    (0, swagger_1.ApiOkResponse)({
+        type: student_dto_1.PatchStudentResponseDto,
+    }),
+    (0, swagger_1.ApiBadRequestResponse)({ type: wrrs_exception_1.WrrsException }),
+    __param(0, (0, common_1.Param)()),
+    __param(1, (0, common_1.Req)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:returntype", Promise)
+], StudentController.prototype, "unlockStudent", null);
 __decorate([
     (0, common_1.Patch)(':id'),
     (0, swagger_1.ApiOperation)({

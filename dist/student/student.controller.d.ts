@@ -8,6 +8,8 @@ export declare class StudentController {
         success: boolean;
     }>;
     getStudent(params: any): Promise<GetStudentDetailResponseDto>;
+    lockStudent(params: any, req: any): Promise<PatchStudentResponseDto>;
+    unlockStudent(params: any, req: any): Promise<PatchStudentResponseDto>;
     patchStudent(params: any, body: any, req: any): Promise<PatchStudentResponseDto>;
     deleteStudent(params: any, req: any): Promise<DeleteStudentResponseDto>;
 }

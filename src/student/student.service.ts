@@ -19,6 +19,7 @@ import {
   GetStudentDetailResponseDto,
   GetStudentSummaryResponseDto,
   PatchStudentRequestDto,
+  PatchStudentResponseDto,
 } from './student.dto';
 import { CommentService } from './student-comment/student-comment.service';
 
@@ -81,13 +82,39 @@ export class StudentService {
     return foundStudent as GetStudentDetailResponseDto;
   }
 
+  async setLock(
+    { username },
+    id: number,
+    locked: boolean,
+  ): Promise<PatchStudentResponseDto> {
+    const user: UserEntity = await this.userRepository.findOne({
+      where: { username },
+    });
+
+    const found = await this.studentRepository.findOne({ where: { id, user } });
+    if (!found) {
+      throw new IdNotFoundException();
+    }
+
+    const updateResult = await this.studentRepository.update(id, { locked });
+    if (updateResult.affected === 0) {
+      throw new IdNotFoundException();
+    }
+
+    await this.commentService.create({ username }, id, {
+      content: `[정보 변경] ${username}\n${locked ? '잠금 설정' : '잠금 해제'}`,
+    });
+
+    return { success: true as const };
+  }
+
   async patch({ username }, id: number, data: PatchStudentRequestDto) {
     const user: UserEntity = await this.userRepository.findOne({
       where: { username },
     });
 
     Object.keys(data).forEach((key) => {
-      if (!['profile_img', 'email', 'phone', 'major', 'locked'].includes(key)) {
+      if (!['profile_img', 'email', 'phone', 'major'].includes(key)) {
         throw new BadDataException();
       }
     });

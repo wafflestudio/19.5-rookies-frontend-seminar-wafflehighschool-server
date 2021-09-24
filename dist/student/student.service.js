@@ -64,12 +64,29 @@ let StudentService = class StudentService {
         }
         return foundStudent;
     }
+    async setLock({ username }, id, locked) {
+        const user = await this.userRepository.findOne({
+            where: { username },
+        });
+        const found = await this.studentRepository.findOne({ where: { id, user } });
+        if (!found) {
+            throw new student_exception_1.IdNotFoundException();
+        }
+        const updateResult = await this.studentRepository.update(id, { locked });
+        if (updateResult.affected === 0) {
+            throw new student_exception_1.IdNotFoundException();
+        }
+        await this.commentService.create({ username }, id, {
+            content: `[정보 변경] ${username}\n${locked ? '잠금 설정' : '잠금 해제'}`,
+        });
+        return { success: true };
+    }
     async patch({ username }, id, data) {
         const user = await this.userRepository.findOne({
             where: { username },
         });
         Object.keys(data).forEach((key) => {
-            if (!['profile_img', 'email', 'phone', 'major', 'locked'].includes(key)) {
+            if (!['profile_img', 'email', 'phone', 'major'].includes(key)) {
                 throw new student_exception_1.BadDataException();
             }
         });

@@ -78,6 +78,38 @@ export class StudentController {
     return this.studentService.find(params.id);
   }
 
+  @Post(':id/lock')
+  @ApiOperation({
+    summary: '학생 잠그기',
+    description: '해당 id의 학생을 잠근다.',
+  })
+  @ApiOkResponse({
+    type: PatchStudentResponseDto,
+  })
+  @ApiBadRequestResponse({ type: WrrsException })
+  async lockStudent(
+    @Param() params,
+    @Req() req,
+  ): Promise<PatchStudentResponseDto> {
+    return this.studentService.setLock(req.user, params.id, true);
+  }
+
+  @Post(':id/unlock')
+  @ApiOperation({
+    summary: '학생 잠금 해제',
+    description: '해당 id의 학생을 잠금 해제한다.',
+  })
+  @ApiOkResponse({
+    type: PatchStudentResponseDto,
+  })
+  @ApiBadRequestResponse({ type: WrrsException })
+  async unlockStudent(
+    @Param() params,
+    @Req() req,
+  ): Promise<PatchStudentResponseDto> {
+    return this.studentService.setLock(req.user, params.id, false);
+  }
+
   @Patch(':id')
   @ApiOperation({
     summary: '학생 정보 수정하기',
