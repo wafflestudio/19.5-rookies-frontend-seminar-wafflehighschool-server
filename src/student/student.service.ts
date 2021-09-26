@@ -16,6 +16,7 @@ import {
 } from './student.exception';
 import {
   CreateStudentRequestDto,
+  CreateStudentResponseDto,
   GetStudentDetailResponseDto,
   GetStudentSummaryResponseDto,
   PatchStudentRequestDto,
@@ -161,7 +162,10 @@ export class StudentService {
     return { success: true as const };
   }
 
-  async create({ username }, student: CreateStudentRequestDto) {
+  async create(
+    { username },
+    student: CreateStudentRequestDto,
+  ): Promise<CreateStudentResponseDto> {
     Object.keys(student).forEach((key) => {
       if (!['name', 'grade'].includes(key)) {
         throw new BadDataException();
@@ -184,9 +188,9 @@ export class StudentService {
       throw new DuplicatedStudentException();
     }
 
-    await this.studentRepository.save(guardedStudent);
+    const created = await this.studentRepository.save(guardedStudent);
 
-    return { success: true };
+    return { success: true, id: created.id };
   }
 
   async delete({ username }, id: number) {

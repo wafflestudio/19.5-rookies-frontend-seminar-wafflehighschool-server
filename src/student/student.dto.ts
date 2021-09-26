@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsBoolean, IsEmail, IsNumber, IsString } from 'class-validator';
+import { IsEmail, IsNumber, IsString } from 'class-validator';
 
 export type validGrade = 1 | 2 | 3;
 export type validName = string;
@@ -52,6 +52,9 @@ export class PatchStudentRequestDto {
 export class CreateStudentResponseDto {
   @ApiProperty({ description: '성공 여부' })
   success: true;
+
+  @ApiProperty({ description: '생성된 id' })
+  id: number;
 }
 
 export class PatchStudentResponseDto {

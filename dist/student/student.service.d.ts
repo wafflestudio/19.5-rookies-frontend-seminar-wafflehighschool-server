@@ -2,7 +2,7 @@ import { Repository } from 'typeorm';
 import { ReqUserDto } from '../user/user.dto';
 import { UserEntity } from '../user/user.entity';
 import { StudentEntity } from './student.entity';
-import { CreateStudentRequestDto, GetStudentDetailResponseDto, GetStudentSummaryResponseDto, PatchStudentRequestDto, PatchStudentResponseDto } from './student.dto';
+import { CreateStudentRequestDto, CreateStudentResponseDto, GetStudentDetailResponseDto, GetStudentSummaryResponseDto, PatchStudentRequestDto, PatchStudentResponseDto } from './student.dto';
 import { CommentService } from './student-comment/student-comment.service';
 export declare class StudentService {
     private studentRepository;
@@ -25,9 +25,7 @@ export declare class StudentService {
     }>;
     create({ username }: {
         username: any;
-    }, student: CreateStudentRequestDto): Promise<{
-        success: boolean;
-    }>;
+    }, student: CreateStudentRequestDto): Promise<CreateStudentResponseDto>;
     delete({ username }: {
         username: any;
     }, id: number): Promise<{

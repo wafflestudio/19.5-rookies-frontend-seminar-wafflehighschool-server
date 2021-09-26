@@ -13,6 +13,7 @@ export declare class PatchStudentRequestDto {
 }
 export declare class CreateStudentResponseDto {
     success: true;
+    id: number;
 }
 export declare class PatchStudentResponseDto {
     success: true;

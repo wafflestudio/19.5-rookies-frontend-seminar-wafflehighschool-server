@@ -70,6 +70,10 @@ __decorate([
     (0, swagger_1.ApiProperty)({ description: '성공 여부' }),
     __metadata("design:type", Boolean)
 ], CreateStudentResponseDto.prototype, "success", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: '생성된 id' }),
+    __metadata("design:type", Number)
+], CreateStudentResponseDto.prototype, "id", void 0);
 exports.CreateStudentResponseDto = CreateStudentResponseDto;
 class PatchStudentResponseDto {
 }
