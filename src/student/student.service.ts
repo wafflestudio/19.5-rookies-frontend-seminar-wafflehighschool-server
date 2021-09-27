@@ -75,7 +75,16 @@ export class StudentService {
 
   async find(id: number): Promise<GetStudentDetailResponseDto> {
     const foundStudent = await this.studentRepository.findOne(id, {
-      select: ['id', 'grade', 'locked', 'name', 'phone', 'major', 'email'],
+      select: [
+        'id',
+        'grade',
+        'locked',
+        'name',
+        'phone',
+        'major',
+        'email',
+        'profile_img',
+      ],
     });
     if (!foundStudent) {
       throw new IdNotFoundException();
