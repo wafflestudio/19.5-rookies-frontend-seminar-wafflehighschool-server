@@ -25,11 +25,11 @@ export class GetCommentResponseDto {
   count: number;
 
   @ApiProperty({
-    description: '다음 페이지',
+    description: '다음 페이지이다. 다음 페이지가 없을 경우 null을 리턴한다.',
     example: 3,
-    nullable: false,
+    nullable: true,
   })
-  next: number;
+  next: number | null;
 }
 
 export class CreateCommentRequestDto {

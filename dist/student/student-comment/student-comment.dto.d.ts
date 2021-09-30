@@ -6,7 +6,7 @@ declare type Comment = {
 export declare class GetCommentResponseDto {
     data: Comment[];
     count: number;
-    next: number;
+    next: number | null;
 }
 export declare class CreateCommentRequestDto {
     content: string;

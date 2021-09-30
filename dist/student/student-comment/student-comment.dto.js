@@ -34,9 +34,9 @@ __decorate([
 ], GetCommentResponseDto.prototype, "count", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({
-        description: '다음 페이지',
+        description: '다음 페이지이다. 다음 페이지가 없을 경우 null을 리턴한다.',
         example: 3,
-        nullable: false,
+        nullable: true,
     }),
     __metadata("design:type", Number)
 ], GetCommentResponseDto.prototype, "next", void 0);
