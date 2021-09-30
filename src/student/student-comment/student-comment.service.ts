@@ -32,7 +32,11 @@ export class CommentService {
       skip: (page - 1) * 20,
       order: { id: 'DESC' },
     });
-    return { data: comments, count, next: page + 1 };
+    return {
+      data: comments,
+      count,
+      next: page * 20 >= count ? null : page + 1,
+    };
   }
 
   async create(
