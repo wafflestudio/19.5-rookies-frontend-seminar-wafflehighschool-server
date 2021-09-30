@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.LoginResponseDto = exports.LoginRequestDto = void 0;
+exports.CheckTokenResponseDto = exports.LoginResponseDto = exports.LoginRequestDto = void 0;
 const swagger_1 = require("@nestjs/swagger");
 class LoginRequestDto {
 }
@@ -41,4 +41,15 @@ __decorate([
     __metadata("design:type", String)
 ], LoginResponseDto.prototype, "access_token", void 0);
 exports.LoginResponseDto = LoginResponseDto;
+class CheckTokenResponseDto {
+}
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        description: '살아있는지 여부',
+        example: true,
+        nullable: false,
+    }),
+    __metadata("design:type", Boolean)
+], CheckTokenResponseDto.prototype, "checked", void 0);
+exports.CheckTokenResponseDto = CheckTokenResponseDto;
 //# sourceMappingURL=auth.dto.js.map

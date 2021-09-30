@@ -24,3 +24,12 @@ export class LoginResponseDto {
   })
   access_token: string;
 }
+
+export class CheckTokenResponseDto {
+  @ApiProperty({
+    description: '살아있는지 여부',
+    example: true,
+    nullable: false,
+  })
+  checked: boolean;
+}

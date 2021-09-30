@@ -18,14 +18,34 @@ const swagger_1 = require("@nestjs/swagger");
 const local_auth_guard_1 = require("./local-auth-guard");
 const auth_service_1 = require("./auth.service");
 const auth_dto_1 = require("./auth.dto");
+const jwt_auth_guard_1 = require("./jwt-auth-guard");
 let AuthController = class AuthController {
     constructor(authService) {
         this.authService = authService;
+    }
+    async check_token(req) {
+        return this.authService.checkUserToken(req.user);
     }
     async login(req) {
         return this.authService.login(req.user);
     }
 };
+__decorate([
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
+    (0, common_1.Get)('check_token'),
+    (0, swagger_1.ApiOperation)({
+        summary: '토큰 체크',
+        description: '토큰이 살아있는지 확인합니다. 살아있지 않을 경우 401 Unauthorized입니다.',
+    }),
+    (0, swagger_1.ApiOkResponse)({
+        type: auth_dto_1.CheckTokenResponseDto,
+        status: 200,
+    }),
+    __param(0, (0, common_1.Request)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], AuthController.prototype, "check_token", null);
 __decorate([
     (0, common_1.UseGuards)(local_auth_guard_1.LocalAuthGuard),
     (0, common_1.Post)('login'),

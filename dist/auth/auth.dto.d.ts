@@ -5,3 +5,6 @@ export declare class LoginRequestDto {
 export declare class LoginResponseDto {
     access_token: string;
 }
+export declare class CheckTokenResponseDto {
+    checked: boolean;
+}

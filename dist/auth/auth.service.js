@@ -25,12 +25,21 @@ const common_1 = require("@nestjs/common");
 const jwt_1 = require("@nestjs/jwt");
 const user_service_1 = require("../user/user.service");
 let AuthService = class AuthService {
-    constructor(usersService, jwtService) {
-        this.usersService = usersService;
+    constructor(userService, jwtService) {
+        this.userService = userService;
         this.jwtService = jwtService;
     }
+    async checkUserToken({ username, }) {
+        const user = await this.userService.findOne(username);
+        if (user) {
+            return { checked: true };
+        }
+        else {
+            return { checked: false };
+        }
+    }
     async validateUser(username, pass) {
-        const user = await this.usersService.findOne(username);
+        const user = await this.userService.findOne(username);
         if (user && user.password === pass) {
             const { password } = user, result = __rest(user, ["password"]);
             return result;
