@@ -27,6 +27,7 @@ import {
   CreateStudentResponseDto,
   DeleteStudentResponseDto,
   GetStudentDetailResponseDto,
+  GetStudentStatResponseDto,
   GetStudentSummaryResponseDto,
   PatchStudentRequestDto,
   PatchStudentResponseDto,
@@ -50,6 +51,20 @@ export class StudentController {
   })
   async getStudents(@Req() req): Promise<GetStudentSummaryResponseDto[]> {
     return this.studentService.findByUser(req.user);
+  }
+
+  @Get('stat')
+  @ApiOperation({
+    summary: '학생 통계 API',
+    description:
+      '모든 유저에게 연결된 모든 학생들의 학년별 인원 정보를 불러온다. 대시보드에 사용하면 된다.',
+  })
+  @ApiOkResponse({
+    isArray: true,
+    type: GetStudentStatResponseDto,
+  })
+  async getStudentStats(): Promise<GetStudentStatResponseDto> {
+    return this.studentService.getStats();
   }
 
   @Post()

@@ -133,3 +133,20 @@ export class GetStudentDetailResponseDto extends GetStudentSummaryResponseDto {
   })
   locked: boolean;
 }
+
+export class GetStudentStatResponseDto {
+  @ApiProperty({
+    description: '학년별 인원 수',
+    example: {
+      1: 10,
+      2: 20,
+      3: 17,
+    },
+    nullable: false,
+  })
+  count: {
+    1: number;
+    2: number;
+    3: number;
+  };
+}

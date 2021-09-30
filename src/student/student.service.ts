@@ -18,6 +18,7 @@ import {
   CreateStudentRequestDto,
   CreateStudentResponseDto,
   GetStudentDetailResponseDto,
+  GetStudentStatResponseDto,
   GetStudentSummaryResponseDto,
   PatchStudentRequestDto,
   PatchStudentResponseDto,
@@ -71,6 +72,19 @@ export class StudentService {
     });
 
     return students as GetStudentSummaryResponseDto[];
+  }
+
+  async getStats(): Promise<GetStudentStatResponseDto> {
+    const ret = {};
+    for (let i = 1; i <= 3; i++) {
+      const [, count] = await this.studentRepository.findAndCount({
+        where: { grade: i },
+      });
+
+      ret[i] = count;
+    }
+
+    return { count: ret as GetStudentStatResponseDto['count'] };
   }
 
   async find(id: number): Promise<GetStudentDetailResponseDto> {

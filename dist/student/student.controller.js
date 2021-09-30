@@ -26,6 +26,9 @@ let StudentController = class StudentController {
     async getStudents(req) {
         return this.studentService.findByUser(req.user);
     }
+    async getStudentStats() {
+        return this.studentService.getStats();
+    }
     async createStudent(body, req) {
         return this.studentService.create(req.user, body);
     }
@@ -60,6 +63,20 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], StudentController.prototype, "getStudents", null);
+__decorate([
+    (0, common_1.Get)('stat'),
+    (0, swagger_1.ApiOperation)({
+        summary: '학생 통계 API',
+        description: '모든 유저에게 연결된 모든 학생들의 학년별 인원 정보를 불러온다. 대시보드에 사용하면 된다.',
+    }),
+    (0, swagger_1.ApiOkResponse)({
+        isArray: true,
+        type: student_dto_1.GetStudentStatResponseDto,
+    }),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], StudentController.prototype, "getStudentStats", null);
 __decorate([
     (0, common_1.Post)(),
     (0, swagger_1.ApiBody)({ type: student_dto_1.CreateStudentRequestDto }),

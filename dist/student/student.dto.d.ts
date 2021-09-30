@@ -34,3 +34,10 @@ export declare class GetStudentDetailResponseDto extends GetStudentSummaryRespon
     major: major | null;
     locked: boolean;
 }
+export declare class GetStudentStatResponseDto {
+    count: {
+        1: number;
+        2: number;
+        3: number;
+    };
+}

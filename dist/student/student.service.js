@@ -55,6 +55,16 @@ let StudentService = class StudentService {
         });
         return students;
     }
+    async getStats() {
+        const ret = {};
+        for (let i = 1; i <= 3; i++) {
+            const [, count] = await this.studentRepository.findAndCount({
+                where: { grade: i },
+            });
+            ret[i] = count;
+        }
+        return { count: ret };
+    }
     async find(id) {
         const foundStudent = await this.studentRepository.findOne(id, {
             select: [

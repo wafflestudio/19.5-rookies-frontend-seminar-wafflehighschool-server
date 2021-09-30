@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.GetStudentDetailResponseDto = exports.GetStudentSummaryResponseDto = exports.DeleteStudentResponseDto = exports.PatchStudentResponseDto = exports.CreateStudentResponseDto = exports.PatchStudentRequestDto = exports.CreateStudentRequestDto = void 0;
+exports.GetStudentStatResponseDto = exports.GetStudentDetailResponseDto = exports.GetStudentSummaryResponseDto = exports.DeleteStudentResponseDto = exports.PatchStudentResponseDto = exports.CreateStudentResponseDto = exports.PatchStudentRequestDto = exports.CreateStudentRequestDto = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 class CreateStudentRequestDto {
@@ -167,4 +167,19 @@ __decorate([
     __metadata("design:type", Boolean)
 ], GetStudentDetailResponseDto.prototype, "locked", void 0);
 exports.GetStudentDetailResponseDto = GetStudentDetailResponseDto;
+class GetStudentStatResponseDto {
+}
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        description: '학년별 인원 수',
+        example: {
+            1: 10,
+            2: 20,
+            3: 17,
+        },
+        nullable: false,
+    }),
+    __metadata("design:type", Object)
+], GetStudentStatResponseDto.prototype, "count", void 0);
+exports.GetStudentStatResponseDto = GetStudentStatResponseDto;
 //# sourceMappingURL=student.dto.js.map
