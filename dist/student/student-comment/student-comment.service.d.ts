@@ -8,7 +8,7 @@ export declare class CommentService {
     private studentRepository;
     private commentRepository;
     constructor(userRepository: Repository<UserEntity>, studentRepository: Repository<StudentEntity>, commentRepository: Repository<CommentEntity>);
-    findByStudentPaginated(id: number, page: number): Promise<GetCommentResponseDto>;
+    findByStudentPaginated(id: number, page?: number): Promise<GetCommentResponseDto>;
     create({ username }: {
         username: any;
     }, id: number, data: {

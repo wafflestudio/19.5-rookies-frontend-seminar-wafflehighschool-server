@@ -22,7 +22,7 @@ export class CommentService {
 
   async findByStudentPaginated(
     id: number,
-    page: number,
+    page: number = 1,
   ): Promise<GetCommentResponseDto> {
     const student = await this.studentRepository.findOne({ where: { id } });
     const [comments, count] = await this.commentRepository.findAndCount({
@@ -31,7 +31,7 @@ export class CommentService {
       take: 20,
       skip: (page - 1) * 20,
     });
-    return { data: comments, count };
+    return { data: comments, count, next: page + 1 };
   }
 
   async create(

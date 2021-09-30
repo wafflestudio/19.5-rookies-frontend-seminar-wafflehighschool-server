@@ -24,6 +24,22 @@ __decorate([
     }),
     __metadata("design:type", Array)
 ], GetCommentResponseDto.prototype, "data", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        description: '총 데이터 개수',
+        example: 4,
+        nullable: false,
+    }),
+    __metadata("design:type", Number)
+], GetCommentResponseDto.prototype, "count", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        description: '다음 페이지',
+        example: 3,
+        nullable: false,
+    }),
+    __metadata("design:type", Number)
+], GetCommentResponseDto.prototype, "next", void 0);
 exports.GetCommentResponseDto = GetCommentResponseDto;
 class CreateCommentRequestDto {
 }

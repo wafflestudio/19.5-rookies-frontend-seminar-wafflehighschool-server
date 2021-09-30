@@ -16,7 +16,20 @@ export class GetCommentResponseDto {
     nullable: false,
   })
   data: Comment[];
+
+  @ApiProperty({
+    description: '총 데이터 개수',
+    example: 4,
+    nullable: false,
+  })
   count: number;
+
+  @ApiProperty({
+    description: '다음 페이지',
+    example: 3,
+    nullable: false,
+  })
+  next: number;
 }
 
 export class CreateCommentRequestDto {
