@@ -4,15 +4,14 @@ import {
   Get,
   Param,
   Post,
+  Query,
   Req,
   UseGuards,
 } from '@nestjs/common';
 import { ApiBody, ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 
 import { JwtAuthGuard } from '../../auth/jwt-auth-guard';
-import { StudentEntity } from '../student.entity';
 
-import { CommentEntity } from './student-comment.entity';
 import { CommentService } from './student-comment.service';
 import {
   CreateCommentRequestDto,
@@ -32,11 +31,13 @@ export class CommentController {
     description: '해당 학생의 모든 댓글을 불러온다.',
   })
   @ApiOkResponse({
-    isArray: true,
     type: GetCommentResponseDto,
   })
-  async getComments(@Param() param): Promise<GetCommentResponseDto[]> {
-    return await this.commentService.findByStudent(param.id);
+  async getComments(
+    @Param() param,
+    @Query('page') page: number,
+  ): Promise<GetCommentResponseDto> {
+    return await this.commentService.findByStudentPaginated(param.id, page);
   }
 
   @Post()

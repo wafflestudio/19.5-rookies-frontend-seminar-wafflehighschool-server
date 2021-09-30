@@ -20,13 +20,18 @@ export class CommentService {
     private commentRepository: Repository<CommentEntity>,
   ) {}
 
-  async findByStudent(id: number): Promise<GetCommentResponseDto[]> {
+  async findByStudentPaginated(
+    id: number,
+    page: number,
+  ): Promise<GetCommentResponseDto> {
     const student = await this.studentRepository.findOne({ where: { id } });
-    const comments = await this.commentRepository.find({
+    const [comments, count] = await this.commentRepository.findAndCount({
       where: { student },
       select: ['id', 'content', 'datetime'],
+      take: 20,
+      skip: (page - 1) * 20,
     });
-    return comments as GetCommentResponseDto[];
+    return { data: comments, count };
   }
 
   async create(

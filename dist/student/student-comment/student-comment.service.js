@@ -26,13 +26,15 @@ let CommentService = class CommentService {
         this.studentRepository = studentRepository;
         this.commentRepository = commentRepository;
     }
-    async findByStudent(id) {
+    async findByStudentPaginated(id, page) {
         const student = await this.studentRepository.findOne({ where: { id } });
-        const comments = await this.commentRepository.find({
+        const [comments, count] = await this.commentRepository.findAndCount({
             where: { student },
             select: ['id', 'content', 'datetime'],
+            take: 20,
+            skip: (page - 1) * 20,
         });
-        return comments;
+        return { data: comments, count };
     }
     async create({ username }, id, data) {
         Object.keys(data).forEach((key) => {

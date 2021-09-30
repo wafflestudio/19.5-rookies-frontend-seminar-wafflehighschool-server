@@ -22,8 +22,8 @@ let CommentController = class CommentController {
     constructor(commentService) {
         this.commentService = commentService;
     }
-    async getComments(param) {
-        return await this.commentService.findByStudent(param.id);
+    async getComments(param, page) {
+        return await this.commentService.findByStudentPaginated(param.id, page);
     }
     async createComment(param, req, body) {
         return await this.commentService.create(req.user, param.id, body);
@@ -36,12 +36,12 @@ __decorate([
         description: '해당 학생의 모든 댓글을 불러온다.',
     }),
     (0, swagger_1.ApiOkResponse)({
-        isArray: true,
         type: student_comment_dto_1.GetCommentResponseDto,
     }),
     __param(0, (0, common_1.Param)()),
+    __param(1, (0, common_1.Query)('page')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
+    __metadata("design:paramtypes", [Object, Number]),
     __metadata("design:returntype", Promise)
 ], CommentController.prototype, "getComments", null);
 __decorate([

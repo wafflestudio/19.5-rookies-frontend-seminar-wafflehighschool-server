@@ -3,6 +3,6 @@ import { CreateCommentResponseDto, GetCommentResponseDto } from './student-comme
 export declare class CommentController {
     private readonly commentService;
     constructor(commentService: CommentService);
-    getComments(param: any): Promise<GetCommentResponseDto[]>;
+    getComments(param: any, page: number): Promise<GetCommentResponseDto>;
     createComment(param: any, req: any, body: any): Promise<CreateCommentResponseDto>;
 }

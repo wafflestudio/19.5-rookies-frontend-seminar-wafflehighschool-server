@@ -60,7 +60,6 @@ export class StudentController {
       '모든 유저에게 연결된 모든 학생들의 학년별 인원 정보를 불러온다. 대시보드에 사용하면 된다.',
   })
   @ApiOkResponse({
-    isArray: true,
     type: GetStudentStatResponseDto,
   })
   async getStudentStats(): Promise<GetStudentStatResponseDto> {
