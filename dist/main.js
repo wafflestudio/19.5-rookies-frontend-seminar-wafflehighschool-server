@@ -13,7 +13,7 @@ async function bootstrap() {
         forbidNonWhitelisted: true,
         transform: true,
     }));
-    await app.listen(5000);
+    await app.listen(8000);
 }
 bootstrap();
 //# sourceMappingURL=main.js.map
