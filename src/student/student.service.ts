@@ -142,7 +142,9 @@ export class StudentService {
 
     if (data.major) {
       if (
-        !['frontend', 'backend', 'android', 'iOS', null].includes(data.major)
+        !['frontend', 'backend', 'android', 'iOS', 'design', null].includes(
+          data.major,
+        )
       ) {
         throw new BadDataException();
       }

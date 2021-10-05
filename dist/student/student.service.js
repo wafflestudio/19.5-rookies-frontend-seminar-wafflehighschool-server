@@ -109,7 +109,7 @@ let StudentService = class StudentService {
             }
         }
         if (data.major) {
-            if (!['frontend', 'backend', 'android', 'iOS', null].includes(data.major)) {
+            if (!['frontend', 'backend', 'android', 'iOS', 'design', null].includes(data.major)) {
                 throw new student_exception_1.BadDataException();
             }
         }

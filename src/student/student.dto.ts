@@ -46,7 +46,7 @@ export class PatchStudentRequestDto {
     required: false,
   })
   @IsString()
-  major?: 'frontend' | 'backend' | 'android' | 'iOS' | null;
+  major?: 'frontend' | 'backend' | 'android' | 'iOS' | 'design' | null;
 }
 
 export class CreateStudentResponseDto {
